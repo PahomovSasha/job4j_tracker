@@ -42,7 +42,7 @@ public class Tracker {
      * @return массив items без null элементов (без пустых клеток)
      */
     public Item[] findAll() {
-        Item[] itemWithoutNull = new Item[this.items.length];
+        Item[] itemWithoutNull = new Item[position];
         int size = 0;
         for (int index = 0; index < position; index++) {
             Item item = items[index];
@@ -51,8 +51,7 @@ public class Tracker {
                 size++;
             }
         }
-        itemWithoutNull = Arrays.copyOf(itemWithoutNull, size);
-        return itemWithoutNull;
+        return Arrays.copyOf(itemWithoutNull, size);
     }
 
     /**
@@ -61,7 +60,7 @@ public class Tracker {
      * @return Массив у которых name совпадает с аргументом String key
      */
     public Item[] findByName(String key) {
-        Item[] itemContainsKey = new Item[this.items.length];
+        Item[] itemContainsKey = new Item[position];
         int size = 0;
         for (int index = 0; index < position; index++) {
             Item item = items[index];
@@ -70,8 +69,7 @@ public class Tracker {
                 size++;
             }
         }
-        itemContainsKey = Arrays.copyOf(itemContainsKey, size);
-        return itemContainsKey;
+        return Arrays.copyOf(itemContainsKey, size);
     }
 
     /**
