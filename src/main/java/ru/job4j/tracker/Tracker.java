@@ -102,10 +102,10 @@ public class Tracker {
     }
 
     /**
-     * Метод, который заменяет завявку по id, при этом № id не меняется.
+     * Метод заменяет заявку по id, при этом № id не меняется.
      * @param id заявки
      * @param item заявка на которую необходимо заменить
-     * @return заменнёную заявку
+     * @return заменнёную заявку, либо null, если id не найден.
      */
     public Item replace(String id, Item item) {
         int index = indexOf(id);
@@ -114,5 +114,21 @@ public class Tracker {
         }
         items[index].setName(item.getName());
         return item;
+    }
+
+    /**
+     * Метод удаляет заявку по id.
+     * @param id заявки
+     * @return список заявок, но уже с учётом удалённой заявки, либо null, если id не найден.
+     */
+    public Item[] delete(String id) {
+        int index = indexOf(id);
+        if (index == -1) {
+            return null;
+        }
+        items[index] = null;
+        System.arraycopy(items, index + 1, items, index, position - index);
+        position--;
+        return items;
     }
 }
