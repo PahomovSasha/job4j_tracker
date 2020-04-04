@@ -38,6 +38,7 @@ public class Tracker {
 
     /**
      * Метод возвращает копию массива items без null элементов (без пустых клеток).
+     *
      * @return массив items без null элементов (без пустых клеток)
      */
     public Item[] findAll() {
@@ -56,6 +57,7 @@ public class Tracker {
 
     /**
      * Метод проверяет в цикле все элементы массива items, сравнивая name с аргументом String key.
+     *
      * @return Массив у которых name совпадает с аргументом String key
      */
     public Item[] findByName(String key) {
@@ -74,15 +76,43 @@ public class Tracker {
 
     /**
      * Метод проверяет в цикле все элементы массива items, сравнивая id с аргументом String id.
+     *
      * @return возвращает найденный Item или если Item не найден - null.
      */
     public Item findById(String id) {
+        int index = indexOf(id);
+        return index != -1 ? items[index] : null;
+    }
+
+    /**
+     * Метод возвращает index по id
+     *
+     * @param id заявки
+     * @return index
+     */
+    private int indexOf(String id) {
+        int rsl = -1;
         for (int index = 0; index < position; index++) {
-            Item item = items[index];
-            if (item.getId().equals(id)) {
-                return item;
+            if (items[index].getId().equals(id)) {
+                rsl = index;
+                break;
             }
         }
-        return null;
+        return rsl;
+    }
+
+    /**
+     * Метод, который заменяет завявку по id, при этом № id не меняется.
+     * @param id заявки
+     * @param item заявка на которую необходимо заменить
+     * @return заменнёную заявку
+     */
+    public Item replace(String id, Item item) {
+        int index = indexOf(id);
+        if (index == -1) {
+            return null;
+        }
+        items[index].setName(item.getName());
+        return item;
     }
 }
