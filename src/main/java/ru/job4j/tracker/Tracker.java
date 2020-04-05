@@ -43,15 +43,8 @@ public class Tracker {
      */
     public Item[] findAll() {
         Item[] itemWithoutNull = new Item[position];
-        int size = 0;
-        for (int index = 0; index < position; index++) {
-            Item item = items[index];
-            if (item != null) {
-                itemWithoutNull[size] = item;
-                size++;
-            }
-        }
-        return Arrays.copyOf(itemWithoutNull, size);
+        System.arraycopy(items, 0, itemWithoutNull, 0, position);
+        return itemWithoutNull;
     }
 
     /**
@@ -101,7 +94,8 @@ public class Tracker {
 
     /**
      * Метод заменяет заявку по id, при этом № id не меняется.
-     * @param id заявки заменяемой заявки
+     *
+     * @param id   заявки заменяемой заявки
      * @param item новая заявка
      * @return Если заявка заменилась - true, иначе false
      */
@@ -117,6 +111,7 @@ public class Tracker {
 
     /**
      * Метод удаляет заявку по id.
+     *
      * @param id заявки
      * @return Если заявка удалилась - true, иначе false
      */
