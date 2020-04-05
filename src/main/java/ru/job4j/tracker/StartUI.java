@@ -57,7 +57,7 @@ public class StartUI {
     private static void select3(Input input, Tracker tracker) {
         System.out.println("=== Delete Item ====");
         String id = input.askStr("Enter ID item: ");
-        if (tracker.delete(id) == null) {
+        if (!tracker.delete(id)) {
             System.out.println("Произошла ошибка, заявка не удалилась");
             System.out.println();
             return;
