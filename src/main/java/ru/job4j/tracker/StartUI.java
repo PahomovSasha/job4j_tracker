@@ -44,8 +44,8 @@ public class StartUI {
     private static void select2(Input input, Tracker tracker) {
         System.out.println("=== Edit Item ====");
         String idOld = input.askStr("Введите ID заявки, которую необходимо заменить: ");
-        String idNew = input.askStr("Введите ID заявки, на которую необходимо заменить: ");
-        if (tracker.replace(idNew, tracker.findById(idOld)) == null) {
+        String nameNew = input.askStr("Введите Имя новой заявки: ");
+        if (!tracker.replace(idOld, new Item(nameNew))) {
             System.out.println("Произошла ошибка, заявка не отредактировалась");
             System.out.println();
             return;

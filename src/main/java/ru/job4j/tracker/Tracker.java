@@ -101,23 +101,24 @@ public class Tracker {
 
     /**
      * Метод заменяет заявку по id, при этом № id не меняется.
-     * @param id заявки
-     * @param item заявка на которую необходимо заменить
-     * @return заменнёную заявку, либо null, если id не найден.
+     * @param id заявки заменяемой заявки
+     * @param item новая заявка
+     * @return Если заявка заменилась - true, иначе false
      */
-    public Item replace(String id, Item item) {
+    public boolean replace(String id, Item item) {
         int index = indexOf(id);
         if (index == -1) {
-            return null;
+            return false;
         }
-        items[index].setName(item.getName());
-        return item;
+        item.setId(id);
+        items[index] = item;
+        return true;
     }
 
     /**
      * Метод удаляет заявку по id.
      * @param id заявки
-     * @return список заявок, но уже с учётом удалённой заявки, либо null, если id не найден.
+     * @return Если заявка удалилась - true, иначе false
      */
     public boolean delete(String id) {
         int index = indexOf(id);
