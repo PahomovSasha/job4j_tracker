@@ -9,7 +9,7 @@ import java.util.StringJoiner;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-public class FindItemByNameTest {
+public class EditItemTest {
 
     @Test
     public void whenCheckValidOutput() {
@@ -19,10 +19,10 @@ public class FindItemByNameTest {
         Tracker tracker = new Tracker();
         Item item = new Item("fix bug");
         tracker.add(item);
-        FindItemByName act = new FindItemByName();
-        act.execute(new StubInput(new String[] {"fix bug"}), tracker);
+        EditItem act = new EditItem();
+        act.execute(new StubInput(new String[]{item.getId(), "Test"}), tracker);
         String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
-                .add("Item: " + "id = " + item.getId() + ", name = " + item.getName() + System.lineSeparator())
+                .add("Заявка отредактирована" + System.lineSeparator())
                 .toString();
         assertThat(new String(out.toByteArray()), is(expect));
         System.setOut(def);
@@ -36,10 +36,10 @@ public class FindItemByNameTest {
         Tracker tracker = new Tracker();
         Item item = new Item("fix bug");
         tracker.add(item);
-        FindItemByName act = new FindItemByName();
-        act.execute(new StubInput(new String[] {"Test"}), tracker);
+        EditItem act = new EditItem();
+        act.execute(new StubInput(new String[]{"Test", "Test"}), tracker);
         String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
-                .add("Заявок с данным именем не найдено" + System.lineSeparator())
+                .add("Произошла ошибка, заявка не отредактировалась" + System.lineSeparator())
                 .toString();
         assertThat(new String(out.toByteArray()), is(expect));
         System.setOut(def);
