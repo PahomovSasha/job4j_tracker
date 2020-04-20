@@ -2,6 +2,9 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertNull;
@@ -24,19 +27,17 @@ public class TrackerTest {
         Item itemTwo = new Item("test2");
         tracker.add(itemOne);
         tracker.add(itemTwo);
-        Item[] result = tracker.findAll();
-        assertThat(result, is(new Item[]{itemOne, itemTwo}));
+        ArrayList<Item> result = (ArrayList<Item>) tracker.findAll();
+        assertThat(result, is(new ArrayList<>(Arrays.asList(itemOne, itemTwo))));
     }
 
     @Test
     public void findItemByName() {
         Tracker tracker = new Tracker();
         Item itemOne = new Item("test1");
-        Item itemTwo = new Item("test2");
         tracker.add(itemOne);
-        tracker.add(itemTwo);
-        Item[] result = tracker.findByName("test1");
-        assertThat(result, is(new Item[]{itemOne}));
+        ArrayList<Item> result = (ArrayList<Item>) tracker.findByName("test1");
+        assertThat(result, is(new ArrayList<>(Arrays.asList(itemOne))));
     }
 
     @Test
